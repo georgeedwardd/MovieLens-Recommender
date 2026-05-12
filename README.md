@@ -8,7 +8,7 @@ A from-scratch implementation of Alternating Least Squares (ALS) matrix factoris
 
 ```
 project/
-├── derivations.md              # Full mathematical derivations of all ALS update equations
+├── derivations.ipynb           # Full mathematical derivations of all ALS update equations
 ├── requirements.txt            # Python dependencies
 ├── model/
 │   └── all_data.npz            # Saved model parameters and training history
