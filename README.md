@@ -48,7 +48,7 @@ Three model variants are implemented, each a strict extension of the previous:
 
 **Feature-regularised ALS** — Regularises item embeddings toward a weighted average of learned feature embeddings (genres, decade), enabling generalisation to items with few ratings.
 
-Full derivations of all closed-form update equations are in [`derivations.md`](derivations.md).
+Full derivations of all closed-form update equations are in [`derivations.ipynb`](derivations.ipynb).
 
 ---
 
