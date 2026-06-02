@@ -247,7 +247,13 @@ hr { border-color: var(--border) !important; }
 """, unsafe_allow_html=True)
 
 # ── Data loading ──────────────────────────────────────────────────────────────
-links = pd.read_csv("data/links.csv")
+import os
+import pandas as pd
+
+BASE_DIR = os.path.dirname(__file__)
+LINKS_PATH = os.path.join(BASE_DIR, "../data/links.csv")
+
+links = pd.read_csv(LINKS_PATH)
 movieid_to_tmdbid = dict(zip(links["movieId"], links["tmdbId"]))
 
 def movieid_to_tmdb(movie_id):
