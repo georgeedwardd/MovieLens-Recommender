@@ -12,12 +12,19 @@ project/
 ├── requirements.txt            # Python dependencies
 ├── model/
 │   └── all_data.npz            # Saved model parameters and training history
-└── notebooks/
-    ├── 01_100k_data.ipynb      # Prototyping and validation on MovieLens 100K
-    ├── 02_32m_data-plots.ipynb # Exploratory Data Analysis on MovieLens 32M
-    ├── 32m_training.ipynb      # Hyperparameter search and full model training on 32M
-    ├── 03_32m_embeddings.ipynb # Embedding analysis and movie similarity
-    └── utils.py                # ALS update functions (biases, embeddings, features)
+├── notebooks/
+│   ├── 01_100k_data.ipynb      # Prototyping and validation on MovieLens 100K
+│   ├── 02_32m_data-plots.ipynb # Exploratory Data Analysis on MovieLens 32M
+│   ├── 32m_training.ipynb      # Hyperparameter search and full model training on 32M
+│   ├── 03_32m_embeddings.ipynb # Embedding analysis and movie similarity
+│   └── utils.py                # ALS update functions (biases, embeddings, features)
+└── application/
+    ├── requirements.txt        # Application-specific dependencies
+    └── src/
+        ├── app.py              # Streamlit web application
+        ├── recommender.py      # Inference — embedding lookup and similarity search
+        └── utils/
+            └── tmdb.py         # TMDB API integration for movie posters
 ```
 
 ---
@@ -49,6 +56,29 @@ Three model variants are implemented, each a strict extension of the previous:
 **Feature-regularised ALS** — Regularises item embeddings toward a weighted average of learned feature embeddings (genres, decade), enabling generalisation to items with few ratings.
 
 Full derivations of all closed-form update equations are in [`derivations.ipynb`](derivations.ipynb).
+
+---
+
+## Application
+
+A live demo of the recommender is deployed at **[ge-movielens-recommender.streamlit.app](https://ge-movielens-recommender.streamlit.app)**.
+
+The application is a Streamlit web app called **CineMatch**. Given a movie title, it retrieves the ten most similar films by computing cosine similarities over the learned item embeddings from the trained ALS model. Movie posters and TMDB links are fetched at runtime via the TMDB API.
+
+**Structure:**
+
+- `app.py` — Streamlit front-end; handles page layout, search, and card rendering.
+- `recommender.py` — Loads the saved model artefacts (`all_data1.npz`) and exposes the `recommend(title, k)` function, which returns the top-$k$ most similar items by embedding dot product.
+- `utils/tmdb.py` — Fetches poster URLs from the TMDB API using the MovieLens–TMDB ID mapping in `data/links.csv`.
+- `data/all_data1.npz` — A version of the trained model artefacts packaged for the application (a filtered subset of the full `model/all_data.npz` for version control).
+
+**Running locally:**
+
+```bash
+cd application
+pip install -r requirements.txt
+streamlit run src/app.py
+```
 
 ---
 
