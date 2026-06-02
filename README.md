@@ -35,9 +35,9 @@ project/
 
 **`02_32m_data-plots.ipynb`** — Exploratory analysis of the 32M dataset. Examines rating distributions, user activity, and movie popularity, with log-log scale visualisations of the long-tail structure.
 
-**`32m_training.ipynb`** — Full training pipeline for the 32M dataset. Constructs the item feature matrix from genre and decade metadata, runs hyperparameter optimisation with Optuna, sweeps embedding dimensions, and saves the final trained model.
-
 **`03_32m_embeddings.ipynb`** — Post-training analysis. Loads the saved model, visualises learned embeddings via PCA, explores genre and decade structure, and demonstrates nearest-neighbour movie similarity queries.
+
+**`32m_training.ipynb`** — Full training pipeline for the 32M dataset. Constructs the item feature matrix from genre and decade metadata, runs hyperparameter optimisation with Optuna, sweeps embedding dimensions, and saves the final trained model.
 
 ---
 
