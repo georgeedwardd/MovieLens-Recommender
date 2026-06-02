@@ -1,7 +1,13 @@
 import numpy as np
 
 # Load model artefacts
-data = np.load("data/all_data1.npz", allow_pickle=True)
+import os
+import numpy as np
+
+BASE_DIR = os.path.dirname(__file__)
+MODEL_PATH = os.path.join(BASE_DIR, "../data/all_data1.npz")
+
+data = np.load(MODEL_PATH, allow_pickle=True)
 
 item_embedding = data["item_embedding"]
 item_index_to_title = data["item_index_to_title"].item()
