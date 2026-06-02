@@ -314,6 +314,7 @@ with col2:
         label_visibility="collapsed",
     )
 
+from recommender import recommend, title_to_item_index, item_index_to_movieid
 # ── Results ───────────────────────────────────────────────────────────────────
 @st.fragment
 def show_results(movie):
@@ -321,9 +322,40 @@ def show_results(movie):
     scores = [s for _, _, _, s in results]
     max_score = max(scores) if scores else 1.0
 
+    # Poster for the searched movie
+    searched_item_idx = title_to_item_index.get(movie)
+    searched_movie_id = item_index_to_movieid.get(searched_item_idx)
+    searched_tmdb_id = movieid_to_tmdb(searched_movie_id)
+    searched_poster_url = get_poster_url(searched_tmdb_id)
+
+    poster_img = (
+        f'<img src="{searched_poster_url}" style="width:180px;border-radius:6px;'
+        f'display:block;margin:0 auto 12px;" alt="{movie}">'
+        if searched_poster_url
+        else '<div style="font-size:40px;text-align:center;margin-bottom:12px;">🎬</div>'
+    )
+
+    poster_link_url = (
+        f"https://www.themoviedb.org/movie/{searched_tmdb_id}"
+        if searched_tmdb_id
+        else f"https://www.google.com/search?q={movie.replace(' ', '+')}"
+    )
+
+    st.markdown(
+        f'<div style="text-align:center;padding:40px 64px 8px;">'
+        f'<a href="{poster_link_url}" target="_blank" style="text-decoration:none;">'
+        f'{poster_img}'
+        f'<h2 style="font-family:\'Cormorant Garamond\',serif;font-size:28px;font-weight:400;'
+        f'color:var(--text);margin:0;">Because you chose '
+        f'<em style="font-style:italic;color:var(--gold)">{movie}</em></h2>'
+        f'</a>'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
+
     st.markdown(
         f'<div class="section-header">'
-        f'<h2>Because you chose <em style="font-style:italic;color:var(--gold)">{movie}</em></h2>'
+        f'<h2>Some recommendations are…</h2>'
         f'<div class="section-line"></div>'
         f'<div class="section-count">{len(results)} titles</div>'
         f'</div>',
