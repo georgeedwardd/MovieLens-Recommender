@@ -68,7 +68,7 @@ The application is a Streamlit web app called **CineMatch**. Given a movie title
 **Structure:**
 
 - `app.py` — Streamlit front-end; handles page layout, search, and card rendering.
-- `recommender.py` — Loads the saved model artefacts (`all_data1.npz`) and exposes the `recommend(title, k)` function, which returns the top-$k$ most similar items by embedding dot product.
+- `recommender.py` — Loads the saved model artefacts (`all_data1.npz`) and exposes the `recommend(title, k)` function, which returns the top- $k$ most similar items by embedding dot product.
 - `utils/tmdb.py` — Fetches poster URLs from the TMDB API using the MovieLens–TMDB ID mapping in `data/links.csv`.
 - `data/all_data1.npz` — A version of the trained model artefacts packaged for the application (a filtered subset of the full `model/all_data.npz` for version control).
 
