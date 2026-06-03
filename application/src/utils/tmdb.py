@@ -1,6 +1,7 @@
 import requests
+import streamlit as st
 
-API_KEY = "bd71de79cf848b2c0a35fc9ae921ec13"
+API_KEY = st.secrets["TMDB_API_KEY"]
 
 _tmdb_cache = {}
 
