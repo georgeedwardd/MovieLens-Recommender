@@ -382,7 +382,7 @@ else:
     st.markdown(
         '<div class="empty-state">'
         '<div class="big-icon">🎞️</div>'
-        '<p>Choose a film above to begin your journey.</p>'
+        '<p>Find recommendations based on your favourite films.</p>'
         '</div>',
         unsafe_allow_html=True,
     )
